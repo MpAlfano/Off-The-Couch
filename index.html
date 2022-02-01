@@ -18,22 +18,67 @@
       href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./assets/css/style.css" 
+    <link rel="stylesheet" href="./assets/css/reset.css" 
     />
-    <title>Title</title>
+    <title>Off The Couch</title>
   </head>
 
   <body>
     <header>
-      <h1>Page Title</h1>
-      <p></p>
-      <p></p>
+      <h1>Off The Couch</h1>
     </header>
 
-  <div class="container">
+      <main class="container">
+        <div class="row"></div>
 
+          <article class="card text-center" style="width: 24rem;">
+            <div class="card-body">
+              <button type="button" class="btn search-input" data-toggle="modal" data-target="#staticBackdrop">Search my Interests</button>
+              <button class="btn random-input">Give me a Random Idea</button>
+              <h5 class="card-title">Need help deciding what to do with your free time?</h5>
+              <p class="card-text">Click "Search my Interests" to narrow your results based on a short list of choices, or click "Give me a Random Idea" to have us choose an activity for you.</p>
+            </div>
 
-  </div>
+            <fig class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Search my Interests</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Activity</label>
+                      <select class="form-control" id="exampleFormControlSelect1">
+                        <option>Placeholder</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn exitBtn" data-dismiss="modal">Exit</button>
+                    <button type="button" class="btn submitBtn">Confirm</button>
+                  </div>
+                </div>
+              </div>
+            </fig>
+          </article>
+
+          <article class="container">
+            <div class="card" style="width: 24rem;">
+              <img src="..." class="card-img-top" alt="...">
+              <div class="card-body">
+                <h4>Search Result Title</h4>
+                <p class="card-text">Search result description? What info is included here?</p>
+                <button type="button" class="btn activityBtn">Website Link</button>
+                <button type="button" class="btn saveBtn">Save this Search</button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
