@@ -18,70 +18,70 @@
       href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./assets/css/reset.css" 
+    
+    <link rel="stylesheet" href="./assets/css/style.css" 
     />
     <title>Off The Couch</title>
   </head>
 
   <body>
-    <header>
-      <h1>Off The Couch</h1>
-    </header>
+    <div class="container">
+    <form class="form-signin">
+      <div class="text-center mb-4">
+        <h1 class="h1 mb-3 font-weight-normal">Off The Couch</h1>
+        <p>Use buttons for searches</p>
+      </div>
 
-      <main class="container">
-        <div class="row"></div>
+      <button type="button" id="modBtn" class="btn btn-lg btn-primary btn-block" data-bs-toggle="modal"
+            data-bs-target="#searchAct">
+            Search Topic
+          </button>
+      <button class="btn btn-lg btn-primary btn-block" id="randomQ" type="submit">Random Search</button>
+      <p class="mt-5 mb-3 text-muted text-center">Paste Search Results Below</p>
+      <div class="container results">
+        <div id="result">
+            
+        </div>
+        
+    </div>
+    </form>
+  </div>
 
-          <article class="card text-center" style="width: 24rem;">
-            <div class="card-body">
-              <button type="button" class="btn search-input" data-toggle="modal" data-target="#staticBackdrop">Search my Interests</button>
-              <button class="btn random-input">Give me a Random Idea</button>
-              <h5 class="card-title">Need help deciding what to do with your free time?</h5>
-              <p class="card-text">Click "Search my Interests" to narrow your results based on a short list of choices, or click "Give me a Random Idea" to have us choose an activity for you.</p>
-            </div>
-
-            <fig class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Search my Interests</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <div class="form-group">
-                      <label for="exampleFormControlSelect1">Activity</label>
-                      <select class="form-control" id="exampleFormControlSelect1">
-                        <option>Placeholder</option>
+            <!-- Modal -->
+            <div class="modal fade" id="searchAct" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content bg-light">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Off The Couch</h5>
+                </div>
+                <div class="modal-body">
+                  <form id="form" autocomplete="off">
+                      <select class="form-control input-lg" id="searchQuery">
+                        <option>Snowboarding</option>
+                        <option>Hiking</option>
+                        <option>Biking</option>
+                        <option>Canoeing</option>
                       </select>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn exitBtn" data-dismiss="modal">Exit</button>
-                    <button type="button" class="btn submitBtn">Confirm</button>
-                  </div>
+
+                </form>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" id="saveSearch">Search</button>
+                  
                 </div>
               </div>
-            </fig>
-          </article>
-
-          <article class="container">
-            <div class="card" style="width: 24rem;">
-              <img src="..." class="card-img-top" alt="...">
-              <div class="card-body">
-                <h4>Search Result Title</h4>
-                <p class="card-text">Search result description? What info is included here?</p>
-                <button type="button" class="btn activityBtn">Website Link</button>
-                <button type="button" class="btn saveBtn">Save this Search</button>
-              </div>
             </div>
-          </article>
+          </div>
 
-        </div>
-      </main>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+          
+
+          <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+          <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+          <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
