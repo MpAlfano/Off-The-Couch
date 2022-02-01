@@ -17,7 +17,7 @@ $(document).ready(function(){
 
 
 
-
+//Selected Activity using serpstackAPI(uses google search)
   $('#saveSearch').on('click', function(e){
   e.preventDefault()
   var query = $("#searchQuery").val()
@@ -37,5 +37,32 @@ $(document).ready(function(){
           `
           $("#result").append(result)
       });
-  })
-})
+  });
+});
+
+
+
+// Random activity using BoredAPI
+let boredUrl = "https://www.boredapi.com/api/activity/"
+
+$('#randomQ').on('click', function(e){
+  e.preventDefault()
+  fetch(boredUrl)
+    .then(function (response) {
+      console.log(response);
+      if (!response.ok) {
+        $("#search-input")[0].reset()
+        alert("ERROR: City not found");
+        throw response.json();
+      }
+      console.log(response.json);
+      return response.json();
+
+    })
+    .then(function (data) {
+      console.log(data);
+      resultRandom = `<p>${data.activity}</p><p><a target="_blank" href="${data.link}">${data.link}</a></p>`
+      document.getElementById("result").innerHTML = resultRandom;
+      
+});
+});
