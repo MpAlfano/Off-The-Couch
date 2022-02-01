@@ -9,6 +9,11 @@
   }
   
   body {
+    background:url('https://images.pexels.com/photos/6758512/pexels-photo-6758512.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+    background-repeat: no-repeat;
+    background-size:cover;
+    overflow:hidden;
+    height: 100vh;
     display: -ms-flexbox;
     display: -webkit-box;
     display: flex;
@@ -88,4 +93,5 @@
 
   .container .results {
     border: solid #495057;
+    background-color: white;
   }
