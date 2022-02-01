@@ -51,8 +51,6 @@ $('#randomQ').on('click', function(e){
     .then(function (response) {
       console.log(response);
       if (!response.ok) {
-        $("#search-input")[0].reset()
-        alert("ERROR: City not found");
         throw response.json();
       }
       console.log(response.json);
