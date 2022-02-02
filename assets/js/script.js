@@ -1,4 +1,4 @@
-var API_KEY = '2b8d450902150d2d261c0e097158851e' //serpstackAPI KEY
+var API_KEY = '456f3fd03724ed1cfa76405f602f5514' //serpstackAPI KEY
 
 //Date and time
 var datetimeP1 = null,
@@ -130,9 +130,9 @@ function searchRandom(resultRandom, randomQuery) {
 
 
 //Mapquest api to fetch location based off geoLocation, only works if user clicks allow. 
-const fetchLocationName =  (lat,lng) => {
+const fetchLocationName =  (position) => {
   
-  navigator.geolocation.getCurrentPosition((position) => {
+    
     
     const lat  = position.coords.latitude;
     const lng = position.coords.longitude;
@@ -156,11 +156,11 @@ const fetchLocationName =  (lat,lng) => {
       );
       searchQuery(searchCity)
     });
-  });
+
 };
 
 // Runs this function on page load
-fetchLocationName()
+// fetchLocationName()
 
 //DIsplays while api loads data
 const loader = document.querySelector("#loading");
@@ -181,3 +181,21 @@ function hideLoading() {
   loader.classList.remove("display");
   loaderText.classList.remove("display");
 }
+
+
+
+// Geolocation denied
+navigator.geolocation.getCurrentPosition(function(position) {
+  console.log("allowed");
+  fetchLocationName(position)
+},
+function(error) {
+  if (error.code == error.PERMISSION_DENIED)
+    console.log("denied");
+     //What will be displayed
+     result =`
+     <h3>For Off The Couch to work, please allow location.</h3>
+     `
+     //Appends to #denied in HTML
+     $("#denied").append(result)
+});
