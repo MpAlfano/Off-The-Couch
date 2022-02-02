@@ -14,12 +14,65 @@
       crossorigin="anonymous" />
     <link
       rel="stylesheet"
+
+    />
+    
+    <link rel="stylesheet" href="./assets/css/style.css" 
+    />
+    <link rel="shortcut icon" type="image/jpg" href="https://img.icons8.com/color/48/000000/couch_potato.png"/>
+
       href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" />
     <link rel="stylesheet" href="./assets/css/style.css" />
+
     <title>Off The Couch</title>
   </head>
-
   <body>
+
+    <div class="container">
+    <form class="form-signin">
+      <div class="text-center">
+        <div id="denied">
+            
+        </div>
+        <h3 class="h3 mb-3 font-weight-normal text-dark" id="datetime-p1"></h3>
+        <h3 class="h3 mb-3 font-weight-normal text-dark" id="datetime-p2"></h3>
+        <h1 class="h1 mb-3 font-weight-normal">Off The Couch</h1>
+      </div>
+
+      <button type="button" id="modBtn" class="btn btn-lg btn-primary btn-block" data-bs-toggle="modal"
+            data-bs-target="#searchAct">
+            Search Topic
+          </button>
+      <button class="btn btn-lg btn-primary btn-block" id="randomQ" type="submit">Random Search</button>
+      <div class="container">
+      <p id="load-text" class="mt-2 mb-3 text-muted text-center">Please Wait While Results Load</p>
+      <div id="loading"></div>
+      <div class="container results">
+        <div id="result">
+            
+        </div>
+    </div>
+    </form>
+  </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="searchAct" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content bg-light">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Off The Couch</h5>
+                </div>
+                <div class="modal-body">
+                  <form id="form" autocomplete="off">
+                      <select class="form-control input-lg" id="searchQuery">
+                        <option>Snowboarding</option>
+                        <option>Hiking</option>
+                        <option>Biking</option>
+                        <option>Canoeing</option>
+                        <option>Restaurant</option>
+                      </select>
+=======
     <span class="background-image" role="img" aria-label="Floral couch with a giant potato on it"></span>
     <main class="container">
       <form class="form-signin">
@@ -38,6 +91,7 @@
         <div id="result"></div>
       </article>
     </main>
+
 
   <!-- Modal -->
     <section class="modal fade" id="searchAct" tabindex="-1" aria-labelledby="Activity Dropdown List"
