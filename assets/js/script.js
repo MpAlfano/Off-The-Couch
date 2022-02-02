@@ -50,11 +50,10 @@ function searchQuery(searchCity) {
   var query = $("#searchQuery").val()  //Grabs value from searchQuery ID in HTML
   let activities = "+" + "activities"; // " " + latitude+ " " +longitude; //Adds "activities" to the search
   let queryA = query + activities + '+' + searchCity; //What were actually searching
-
   let result=''
-
   var url = 'http://api.serpstack.com/search?access_key='  + API_KEY+"&type=web&num=1&google_domain=google.ca"+"&query=" +queryA
   console.log(url);
+  displayLoading()
   $.get(url, function(data){
       $("#result").html('')
       console.log(data)
@@ -66,6 +65,7 @@ function searchQuery(searchCity) {
           <p>${res.snippet}</p>
           `
           //Appends to #result in HTML
+          hideLoading()
           $("#result").append(result)
       });
   });
@@ -107,6 +107,7 @@ $('#randomQ').on('click', function(e){
 function searchRandom(resultRandom, randomQuery) {
   var url = 'http://api.serpstack.com/search?access_key='  + API_KEY+"&type=web&num=1&google_domain=google.ca"+"&query=" +randomQuery
   console.log(url);
+  displayLoading()
   $.get(url, function(data){
       $("#result").html('')
       console.log(resultRandom)
@@ -119,19 +120,25 @@ function searchRandom(resultRandom, randomQuery) {
           <p>${res.title}</p>
           `
           //Appends to #result in HTML
+          hideLoading()
           $("#result").append(result)
       });
   });
 
 }
 
+
+
 //Mapquest api to fetch location based off geoLocation, only works if user clicks allow. 
 const fetchLocationName =  (lat,lng) => {
+  
   navigator.geolocation.getCurrentPosition((position) => {
+    
     const lat  = position.coords.latitude;
     const lng = position.coords.longitude;
     console.log(lat)
     console.log(lng)
+
  
    fetch(
     'https://www.mapquestapi.com/geocoding/v1/reverse?key=PRZUpttP0TCp8zsRVAIyHZz7mpmjIupR&location='+lat+'%2C'+lng+'&outFormat=json&thumbMaps=false',
@@ -154,3 +161,23 @@ const fetchLocationName =  (lat,lng) => {
 
 // Runs this function on page load
 fetchLocationName()
+
+//DIsplays while api loads data
+const loader = document.querySelector("#loading");
+const loaderText = document.querySelector("#load-text");
+//Display Loading
+function displayLoading() {
+  loader.classList.add("display");
+  loaderText.classList.add("display");
+  //Stops loader after 5 seconds
+  setTimeout(() => {
+      loader.classList.remove("display");
+      loaderText.classList.remove("display");
+  }, 5000);
+}
+
+//Hiding Loading 
+function hideLoading() {
+  loader.classList.remove("display");
+  loaderText.classList.remove("display");
+}
