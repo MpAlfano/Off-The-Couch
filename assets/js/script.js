@@ -39,7 +39,8 @@ function searchQuery(searchCity) {
 
     if (query === "Restaurant") { //restaurant is selected we give it a descriptor
       x = Math.floor(Math.random() * 10)
-      queryA = foodType[x] + "+" + query + "+" + "Toronto+ON"
+      console.log(x)
+      queryA = foodType[x] + "+" + query + "+" + searchCity
 
       var url = 'http://api.serpstack.com/search?access_key=' + API_KEY + "&type=web&num=1&google_domain=google.ca" + "&query=" + queryA
       console.log(url);
@@ -50,7 +51,7 @@ function searchQuery(searchCity) {
         data.local_results.forEach(res => {
           //What will be displayed
           result = `
-        <h3>${res.title}</h3><br><a target="_blank" href="${res.url}">${res.url}</a>
+        <h3>${res.title}</h3><br><a target="_blank" href="https://www.google.com/search?q=${res.title}">Search ${res.title} on Google</a>
         <p>${res.address}</p>
           `
           //Appends to #result in HTML
