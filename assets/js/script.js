@@ -1,3 +1,30 @@
+
+var API_KEY = '456f3fd03724ed1cfa76405f602f5514' //serpstackAPI KEY
+
+//Date and time
+var datetimeP1 = null,
+        date = null;
+var datetimeP2 = null,
+    date = null;
+
+//Date formats, first is day/month/year
+var update = function () {
+    date = moment(new Date())
+    datetimeP1.html(date.format('dddd, MMM Do, YY'));
+    //current time
+    datetimeP2.html(date.format('h:mm a'));
+};
+//Time updater, updates every 1sec
+$(document).ready(function(){
+    datetimeP1 = $('#datetime-p1')
+    datetimeP2 = $('#datetime-p2')
+    update();
+    setInterval(update, 1000);
+});
+
+
+// Opens Modal on click of "search topic" button
+
 // Opens Modal on click of "search topic" button
 
 
@@ -5,16 +32,19 @@
 $(document).ready(function () {
   $("#modBtn").click(function () {
     $("#searchAct").modal();
+
+
+  
+  // Closes modal on click of "search" button
+  $(`#saveSearch`).click(function(e) {
+    e.preventDefault();
+    $(`#searchAct`).modal(`toggle`);
+    return false;
+
   });
 });
 
 
-// Closes modal on click of "search" button
-$('#saveSearch').click(function (e) {
-  e.preventDefault();
-  $('#searchAct').modal('toggle');
-  return false;
-});
 
 
 
@@ -33,7 +63,6 @@ function searchQuery(searchCity) {
     var query = $("#searchQuery").val()  //Grabs value from searchQuery ID in HTML
     let activities = "+" + "activities"; // " " + latitude+ " " +longitude; //Adds "activities" to the search
     let queryA = query + activities + '+' + searchCity; //What were actually searching
-    var API_KEY = '4351effe40295aa6c5165a4f79c80fdd' //serpstackAPI KEY
     let result = ''
     let x = "";
 
@@ -44,6 +73,7 @@ function searchQuery(searchCity) {
 
       var url = 'http://api.serpstack.com/search?access_key=' + API_KEY + "&type=web&num=1&google_domain=google.ca" + "&query=" + queryA
       console.log(url);
+      displayLoading()
       $.get(url, function (data) {
         $("#result").html('')
         console.log(data)
@@ -55,12 +85,14 @@ function searchQuery(searchCity) {
         <p>${res.address}</p>
           `
           //Appends to #result in HTML
+          hideLoading()
           $("#result").append(result)
         });
       });
     } else {
       var url = 'http://api.serpstack.com/search?access_key=' + API_KEY + "&type=web&num=1&google_domain=google.ca" + "&query=" + queryA
       console.log(url);
+      displayLoading()
       $.get(url, function (data) {
         $("#result").html('')
         console.log(data)
@@ -70,8 +102,10 @@ function searchQuery(searchCity) {
           result = `
           <h3>${res.title}</h3><br><a target="_blank" href="${res.url}">${res.url}</a>
           <p>${res.snippet}</p>
-          `
+          `;
           //Appends to #result in HTML
+
+          hideLoading()
           $("#result").append(result)
         });
       });
@@ -81,13 +115,21 @@ function searchQuery(searchCity) {
 
 
 
+
 // Random activity using BoredAPI
 // use data."console.log ID"
-let boredUrl = "https://www.boredapi.com/api/activity/"
+let boredUrl = `https://www.boredapi.com/api/activity/`;
 
 //Random button on click
+
 $('#randomQ').on('click', function (e) {
+
   e.preventDefault()
+  searchQuery(searchCity)
+
+$(`#randomQ`).on(`click`, function(e){
+  e.preventDefault();
+
   fetch(boredUrl)
     .then(function (response) {
       console.log(response);
@@ -101,38 +143,87 @@ $('#randomQ').on('click', function (e) {
     .then(function (data) {
       console.log(data);
       //What will be displayed
-      resultRandom = `<h3>${data.activity}</h3><p><a target="_blank" href="${data.link}">${data.link}</a></p>`
-
+      resultRandom = `<h3>${data.activity}</h3><p><a target="_blank" href="${data.link}">${data.link}</a></p>`;
       //Displays in #result in HTML
-      document.getElementById("result").innerHTML = resultRandom;
-
+      document.getElementById(`result`).innerHTML = resultRandom;
     });
 });
 
-
-const fetchLocationName = (lat, lng) => {
+const fetchLocationName = (lat,lng) => {
   navigator.geolocation.getCurrentPosition((position) => {
-    const lat = position.coords.latitude;
+    const lat  = position.coords.latitude;
     const lng = position.coords.longitude;
-    console.log(lat)
-    console.log(lng)
+    console.log(lat);
+    console.log(lng);
 
-    fetch(
-      'https://www.mapquestapi.com/geocoding/v1/reverse?key=PRZUpttP0TCp8zsRVAIyHZz7mpmjIupR&location=' + lat + '%2C' + lng + '&outFormat=json&thumbMaps=false',
-    )
-      .then((response) => response.json())
-      .then((responseJson) => {
-        console.log(responseJson)
-        console.log(responseJson.results[0].locations[0].adminArea5)
-        console.log(
-          'ADDRESS GEOCODE is BACK!! => ' + JSON.stringify(responseJson),
-          searchCity = responseJson.results[0].locations[0].adminArea5 + "+" + responseJson.results[0].locations[0].adminArea3
+ 
+   fetch(
+    `https://www.mapquestapi.com/geocoding/v1/reverse?key=PRZUpttP0TCp8zsRVAIyHZz7mpmjIupR&location=` + lat + `%2C` + lng + `&outFormat=json&thumbMaps=false`,
+  )
+    .then((response) => response.json())
+    .then((responseJson) => {
+
+      console.log(responseJson)
+      console.log(responseJson.results[0].locations[0])
+      console.log(responseJson.results[0].locations[0].adminArea5)
+
+      console.log(responseJson);
+      console.log(responseJson.results[0].locations[0].adminArea5);
+
+      console.log(
+        `ADDRESS GEOCODE is BACK!! => ` + JSON.stringify(responseJson),
+       searchCity = responseJson.results[0].locations[0].adminArea5 + "+" + responseJson.results[0].locations[0].adminArea3
+      );
+      searchQuery(searchCity);
+    });
 
 
-        );
-        searchQuery(searchCity)
-      });
-  });
 };
 
-fetchLocationName()
+// Runs this function on page load
+// fetchLocationName()
+
+//DIsplays while api loads data
+const loader = document.querySelector("#loading");
+const loaderText = document.querySelector("#load-text");
+//Display Loading
+function displayLoading() {
+  loader.classList.add("display");
+  loaderText.classList.add("display");
+  //Stops loader after 5 seconds
+  setTimeout(() => {
+      loader.classList.remove("display");
+      loaderText.classList.remove("display");
+  }, 5000);
+}
+
+//Hiding Loading 
+function hideLoading() {
+  loader.classList.remove("display");
+  loaderText.classList.remove("display");
+}
+
+
+
+// Geolocation denied
+navigator.geolocation.getCurrentPosition(function(position) {
+  console.log("allowed");
+  fetchLocationName(position)
+},
+function(error) {
+  if (error.code == error.PERMISSION_DENIED)
+    console.log("denied");
+     //What will be displayed
+     result =`
+     <h3>For Off The Couch to work, please allow location.</h3>
+     `
+     //Appends to #denied in HTML
+     $("#denied").append(result)
+});
+
+
+  });
+}
+
+fetchLocationName();
+
