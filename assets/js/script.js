@@ -28,15 +28,16 @@ $(document).ready(function(){
       $("#searchAct").modal();
     });
   });
-  
+ 
   
   // Closes modal on click of "search" button
   $('#saveSearch').click(function(e) {
     e.preventDefault();
     $('#searchAct').modal('toggle');
     return false;
-  });
 
+  });
+});
 
 
 //Selected Activity using serpstackAPI(uses google search)
@@ -102,13 +103,13 @@ function searchQuery(searchCity) {
 }
 
 
-
 // Random activity using BoredAPI
 // use data."console.log ID"
 let boredUrl = "https://www.boredapi.com/api/activity/"
 
 //Random button on click
 $('#randomQ').on('click', function(e){
+
   e.preventDefault()
   searchQuery(searchCity)
   fetch(boredUrl)
@@ -167,7 +168,6 @@ const fetchLocationName =  (position) => {
     const lng = position.coords.longitude;
     console.log(lat)
     console.log(lng)
-
  
    fetch(
     'https://www.mapquestapi.com/geocoding/v1/reverse?key=PRZUpttP0TCp8zsRVAIyHZz7mpmjIupR&location='+lat+'%2C'+lng+'&outFormat=json&thumbMaps=false',
@@ -178,9 +178,9 @@ const fetchLocationName =  (position) => {
       console.log(responseJson.results[0].locations[0])
       console.log(responseJson.results[0].locations[0].adminArea5)
       console.log(
+
         'ADDRESS GEOCODE is BACK!! => ' + JSON.stringify(responseJson),
         searchCity = responseJson.results[0].locations[0].adminArea5 + "+" + responseJson.results[0].locations[0].adminArea3
-        
         
       );
       searchQuery(searchCity)
