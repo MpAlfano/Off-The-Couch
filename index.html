@@ -21,19 +21,19 @@
     
     <link rel="stylesheet" href="./assets/css/style.css" 
     />
-    <title>Title</title>
+    <link rel="shortcut icon" type="image/jpg" href="https://img.icons8.com/color/48/000000/couch_potato.png"/>
+    <title>Off The Couch</title>
   </head>
   <body>
     <div class="container">
     <form class="form-signin">
-      <div class="text-center mb-4">
+      <div class="text-center">
         <div id="denied">
             
         </div>
-        <h1 class="h1 mb-3 font-weight-normal text-dark" id="datetime-p1"></h1>
-        <h1 class="h1 mb-3 font-weight-normal text-dark" id="datetime-p2"></h1>
+        <h3 class="h3 mb-3 font-weight-normal text-dark" id="datetime-p1"></h3>
+        <h3 class="h3 mb-3 font-weight-normal text-dark" id="datetime-p2"></h3>
         <h1 class="h1 mb-3 font-weight-normal">Off The Couch</h1>
-        <p>Use buttons for searches</p>
       </div>
 
       <button type="button" id="modBtn" class="btn btn-lg btn-primary btn-block" data-bs-toggle="modal"
@@ -41,13 +41,13 @@
             Search Topic
           </button>
       <button class="btn btn-lg btn-primary btn-block" id="randomQ" type="submit">Random Search</button>
-      <p id="load-text" class="mt-5 mb-3 text-muted text-center">Please Wait While Results Load</p>
+      <div class="container">
+      <p id="load-text" class="mt-2 mb-3 text-muted text-center">Please Wait While Results Load</p>
       <div id="loading"></div>
       <div class="container results">
         <div id="result">
             
         </div>
-        
     </div>
     </form>
   </div>
@@ -67,6 +67,7 @@
                         <option>Hiking</option>
                         <option>Biking</option>
                         <option>Canoeing</option>
+                        <option>Restaurant</option>
                       </select>
 
                 </form>

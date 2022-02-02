@@ -67,6 +67,8 @@ function searchQuery(searchCity) {
           //Appends to #result in HTML
           hideLoading()
           $("#result").append(result)
+
+          
       });
   });
 });
@@ -199,3 +201,4 @@ function(error) {
      //Appends to #denied in HTML
      $("#denied").append(result)
 });
+
