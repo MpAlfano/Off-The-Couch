@@ -126,3 +126,19 @@
         transform: rotate(360deg);
     }
 }
+
+
+.list-group {
+  list-style: none;
+}
+
+.list-group .oldCity {
+  color: white;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  text-align: left;
+  background: rgba(24,24,27, 0.6);
+  cursor: pointer; 
+}

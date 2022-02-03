@@ -1,5 +1,6 @@
-var API_KEY = '456f3fd03724ed1cfa76405f602f5514' //serpstackAPI KEY
-
+var API_KEY = 'b72d9ddc6784c2016c61a1752156de57' //serpstackAPI KEY
+var searchList = "";
+var searchListUrl = "";
 //Date and time
 var datetimeP1 = null,
         date = null;
@@ -37,7 +38,7 @@ $(document).ready(function(){
     return false;
 
   });
-});
+
 
 
 //Selected Activity using serpstackAPI(uses google search)
@@ -67,6 +68,7 @@ function searchQuery(searchCity) {
         $("#result").html('')
         console.log(data)
         console.log(queryA)
+        console.log(data.local_results)
         data.local_results.forEach(res => {
           //What will be displayed
           result = `
@@ -75,7 +77,9 @@ function searchQuery(searchCity) {
           `
           //Appends to #result in HTML
           hideLoading()
+          updateSearch()
           $("#result").append(result)
+         
         });
       });
     } else {
@@ -86,6 +90,10 @@ function searchQuery(searchCity) {
         $("#result").html('')
         console.log(data)
         console.log(queryA)
+        console.log(data.organic_results[0].title)
+        searchList = data.organic_results[0].title
+        searchListUrl = data.organic_results[0].url
+        // searchListUrl = data.organic_results.url
         data.organic_results.forEach(res => {
           //What will be displayed
           result = `
@@ -95,7 +103,9 @@ function searchQuery(searchCity) {
           //Appends to #result in HTML
 
           hideLoading()
+          updateSearch(searchList)
           $("#result").append(result)
+          
         });
       });
     }
@@ -141,8 +151,12 @@ function searchRandom(resultRandom, randomQuery) {
   $.get(url, function(data){
       $("#result").html('')
       console.log(resultRandom)
-      console.log(data)
+      console.log(data.organic_results[0].url)
+      dataOrg = data.organic_results;
+      searchListUrl = data.organic_results[0].url
+      console.log(searchListUrl)
       description = data.knowledge_graph
+      searchList = data.organic_results
       data.organic_results.forEach(res => {
         //What will be displayed
           result =`
@@ -151,7 +165,9 @@ function searchRandom(resultRandom, randomQuery) {
           `
           //Appends to #result in HTML
           hideLoading()
+          updateSearch(resultRandom, searchListUrl)
           $("#result").append(result)
+          
       });
   });
 
@@ -228,4 +244,74 @@ function(error) {
      //Appends to #denied in HTML
      $("#denied").append(result)
 });
+
+
+var searchListSave = [];
+var searchListUrlSave = [];
+
+function updateSearch(searchList) {  //saves search to localstorage
+  searchListSave.unshift(searchList)
+  searchListUrlSave.unshift(searchListUrl)
+ 
+  console.log(searchList)
+  console.log(searchListSave)
+  console.log(searchListUrlSave)
+  localStorage.setItem("searchListSave", JSON.stringify(searchListSave)); //saves searchList
+  localStorage.setItem("searchListUrlSave", JSON.stringify(searchListUrlSave)); //saves searchList
+
+  console.log(searchList + searchListUrl)
+  return showSearchList(searchList, searchListUrl);
+}
+
+function init() {  //function to load the text from memory
+  searchListSave = JSON.parse(localStorage.getItem("searchListSave"));
+  searchListUrlSave = JSON.parse(localStorage.getItem("searchListUrlSave"));
+  console.log(searchListSave)
+  console.log(searchListUrlSave)
+  if (!searchListSave || !searchListUrlSave ) {  //check to see if the variable exists
+    console.log("- No saved information"); //prints error message in console
+    searchListSave = [];
+    searchListUrlSave = [];
+    return searchListSave;
+  }
+
+    return showSearchList();
+    
+  }
+  let cityListEl = document.getElementById("cityListGroup");
+  function showSearchList() {  //displays the list of cities chosen in the past
+    var varText = "";
+    cityListEl.innerHTML = "";
+    for (var i = 0; i < searchListSave.length; i++) {
+ 
+
+
+      var li = document.createElement('a');
+
+      var linkText = document.createTextNode(searchListSave[i]);
+      li.appendChild(linkText);
+      li.setAttribute("class", "oldCity")
+      li.title = "searchListSave[i]";
+      li.href = searchListUrlSave[i];
+      $("#cityListGroup").append(li);
+
+
+
+
+      // console.log(li.textContent)
+      // li.setAttribute("class", "oldCity")
+      // a.setAttribute = ("href", searchListUrlSave[i])
+      // // li.setAttribute("href", searchListUrlSave[i])
+      // $("#cityListGroup").append(li);
+  
+      // varText += `<li class="oldCity" ('` + searchListSave[i] + `')">` + searchListUrlSave[i] + `/li>`;
+    }
+    console.log(varText)
+      
+    // $("#cityListGroup").append(searchListSave + searchListUrlSave)
+  }
+
+init()
+
+
 
