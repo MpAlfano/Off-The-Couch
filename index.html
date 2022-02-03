@@ -22,18 +22,20 @@
                 <div id="denied"></div>
                 <br>
                 <div class="recentSearch">Recent Searches</div>
+
+                <ul class="nav justify-content-center list-group " id="cityListGroup"> <!-- button line added local storage-->
                 <h3 class="h3 mb-3" id="datetime-p1"></h3>
                 <h3 class="h3 mb-3" id="datetime-p2"></h3>
-                </ul>
                 <h1 class="h1 mb-3">Off The Couch</h1>
                 <p>Click "Let Me Pick" to select from a list of activities OR click "Pick For Me" to randomly generate an activity</p>
               </div>
-            <button type="button" id="modBtn" class="btn btn-lg btn-block hvr-grow" data-bs-toggle="modal"
+            <button type="button" id="modBtn" class="btn btn-lg hvr-grow btn-block" data-bs-toggle="modal"
               data-bs-target="#searchAct">
               Let Me Pick
             </button>
-            <button class="btn btn-lg btn-block hvr-grow" id="randomQ" type="submit">Pick For Me</button>
-            <button class="btn btn-lg btn-block hvr-grow" id="randomQ" type="submit">Restaurant</button>
+            <button class="btn btn-lg hvr-grow btn-block" id="randomQ" type="submit">Pick For Me</button>
+            <button class="btn btn-lg btn-block hvr-grow" id="restaurantSearch" type="submit">Discove a new restaurant</button>
+            
             </form>
             <p id="load-text" class="mt-2 mb-3 text-center">Please Wait While Results Load</p>
             <div id="loading"></div>
@@ -67,7 +69,9 @@
                         <option id="boardgames -reddit">Play a boardgame</option>
             <!-- Need 2nd search to get an exact link or keep google search link -->
                         <option id="Restaurant">Find a random restaurant</option>
-                      <option id="Swimming pools">Go swimming at an indoor pool</option>
+                        
+                        <option id="Swimming pools">Go swimming at an indoor pool</option>
+
             <!-- Use an online link or replace? -->
                         <option id="chess online">Play some chess</option>
       <!-- Have direct to a link or top movies to watch current year  -->
@@ -78,7 +82,7 @@
                         <option id="pottery class online">Take a pottery class</option>
                                  <!--Change search  -->
                         <option id="archery centre">Try out archery</option>
-                                 <!--Change to virtual?  -->
+
                         <option id="axe throwing">Go axe throwing</option>
                                  <!--not working for me Change search params  -->
                         <option id="escape rooms">Try an escape room</option>
@@ -93,7 +97,7 @@
                              <!--Change search -groupon -->
                         <option id="yoga studio">Take a yoga class</option>
                              <!--Change search direct to an online place to play? -->
-                        <option id="ddo.com">Play dungeons & dragons</option>
+                        <option id="ddo.com dungeon dragons">Play dungeons & dragons</option>
                                <!--List of top books to read?  -->
                         <option id="top reads for fun">Read a book</option>
                         <option id="glow in the dark mini-putt">Play mini-golf</option>
