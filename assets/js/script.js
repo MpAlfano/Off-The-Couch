@@ -1,4 +1,4 @@
-var API_KEY = 'a65611fcb590f3f84f3f4d53fb15ab66' //serpstackAPI KEY
+var API_KEY = 'bc5959f7670188cce52f425b8b348f13' //serpstackAPI KEY
 var searchList = "";
 var searchListUrl = "";
 //Date and time
@@ -126,7 +126,6 @@ function searchQuery(searchCity) {
         });
       }
     });
-    // }
   });
 }
 // Random activity using BoredAPI
@@ -252,7 +251,7 @@ function updateSearch(searchList) {  //saves search to localstorage
   if (searchListSave.length && searchListUrlSave.length > 5) {
     searchListSave.pop(); // removes the first element from an array 
     searchListUrlSave.pop();
-  }
+
   console.log(searchList)
   console.log(searchListSave)
   console.log(searchListUrlSave)
