@@ -1,4 +1,4 @@
-var API_KEY = 'b72d9ddc6784c2016c61a1752156de57' //serpstackAPI KEY
+var API_KEY = 'd61824ced86a8c06bbc1a701c59c52f4' //serpstackAPI KEY
 var searchList = "";
 var searchListUrl = "";
 //Date and time
@@ -57,7 +57,7 @@ function searchQuery(searchCity) {
     let x = "";
 
     if (query === "Restaurant") { //restaurant is selected we give it a descriptor
-      x = Math.floor(Math.random() * 10)
+      x = Math.floor(Math.random() * 9)
       console.log(x)
       queryA = foodType[x] + "+" + query + "+" + searchCity
 
@@ -68,19 +68,20 @@ function searchQuery(searchCity) {
         $("#result").html('')
         console.log(data)
         console.log(queryA)
-        console.log(data.local_results)
-        data.local_results.forEach(res => {
-          //What will be displayed
+        console.log(data.local_results[0].title)
+        searchList = data.local_results[0].title
+        searchListUrl = "https://www.google.com/search?q=${searchList}"
+      //What will be displayed
           result = `
-        <h3>${res.title}</h3><br><a target="_blank" href="https://www.google.com/search?q=${res.title}">Search ${res.title} on Google</a>
-        <p>${res.address}</p>
+        <h3>${data.local_results[0].title}</h3><br><a target="_blank" href="https://www.google.com/search?q=${data.local_results[0].title}">Search ${data.local_results[0].title} on Google</a>
+        <p>${data.local_results[0].address}</p>
           `
-          //Appends to #result in HTML
-          hideLoading()
-          updateSearch()
           $("#result").append(result)
-         
-        });
+        
+                  //Appends to #result in HTML
+                  hideLoading()
+                  updateSearch(searchList, searchListUrl)
+                  console.log(result)
       });
     } else {
       var url = 'http://api.serpstack.com/search?access_key=' + API_KEY + "&type=web&num=1&google_domain=google.ca" + "&query=" + queryA
@@ -218,7 +219,7 @@ function displayLoading() {
   setTimeout(() => {
       loader.classList.remove("display");
       loaderText.classList.remove("display");
-  }, 5000);
+  }, 10000);
 }
 
 //Hiding Loading 
@@ -252,7 +253,9 @@ var searchListUrlSave = [];
 function updateSearch(searchList) {  //saves search to localstorage
   searchListSave.unshift(searchList)
   searchListUrlSave.unshift(searchListUrl)
- 
+  if (searchListSave.length && searchListUrlSave.length > 5) {
+    searchListSave.pop(); // removes the first element from an array 
+}
   console.log(searchList)
   console.log(searchListSave)
   console.log(searchListUrlSave)
@@ -291,24 +294,12 @@ function init() {  //function to load the text from memory
       var linkText = document.createTextNode(searchListSave[i]);
       li.appendChild(linkText);
       li.setAttribute("class", "oldCity")
-      li.title = "searchListSave[i]";
+      li.title = "";
       li.href = searchListUrlSave[i];
       $("#cityListGroup").append(li);
 
-
-
-
-      // console.log(li.textContent)
-      // li.setAttribute("class", "oldCity")
-      // a.setAttribute = ("href", searchListUrlSave[i])
-      // // li.setAttribute("href", searchListUrlSave[i])
-      // $("#cityListGroup").append(li);
-  
-      // varText += `<li class="oldCity" ('` + searchListSave[i] + `')">` + searchListUrlSave[i] + `/li>`;
     }
-    console.log(varText)
       
-    // $("#cityListGroup").append(searchListSave + searchListUrlSave)
   }
 
 init()
