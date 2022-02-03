@@ -88,6 +88,21 @@ body {
   color: var(--medlit);
 }
 
+.list-group {   
+  list-style: none;
+}
+
+.list-group .oldCity {
+  color: white;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  text-align: left;
+  background: rgba(24,24,27, 0.6);
+  cursor: pointer; 
+}
+
 .modal-header {
   background-color: var(--dark);
   color: var(--white);
@@ -124,9 +139,11 @@ p {
 #load-text {
   visibility: hidden;
 }
+
 #load-text.display {
   visibility: visible;
 }
+
 #loading {
   margin: auto;
   margin-top: 10px;
@@ -152,10 +169,11 @@ p {
       transform: rotate(360deg);
   }
 }
+ /* Button styling end */
 
 @media (max-width:600px)  {
   body {
-    background:url(../images/);
+    background:url(../images/mobile_img_compressed.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size:cover;
@@ -169,21 +187,3 @@ p {
     -webkit-box-pack: center;
     justify-content: center;
   }
-}
-
-/* Button styling start*/
-.list-group {   
-  list-style: none;
-}
-
-.list-group .oldCity {
-  color: white;
-  border: 1px solid #eee;
-  border-radius: 10px;
-  padding: 10px;
-  margin: 10px;
-  text-align: left;
-  background: rgba(24,24,27, 0.6);
-  cursor: pointer; 
-}
- /* Button styling end */
