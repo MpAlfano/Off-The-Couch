@@ -127,8 +127,8 @@
     }
 }
 
-
-.list-group {
+/* Button styling start*/
+.list-group {   
   list-style: none;
 }
 
@@ -142,3 +142,4 @@
   background: rgba(24,24,27, 0.6);
   cursor: pointer; 
 }
+ /* Button styling end */
