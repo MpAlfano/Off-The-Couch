@@ -9,7 +9,6 @@
   }
 
   header {
-      background-color: grey;
       height: 150px;
       color: white;
       text-align: center;
@@ -37,7 +36,6 @@
     margin-bottom: 30px;
     
   }
-
   .card {
     margin: 15px;
   }

@@ -1,4 +1,4 @@
-var API_KEY = 'd61824ced86a8c06bbc1a701c59c52f4' //serpstackAPI KEY
+var API_KEY = '87cf9406de06e84ff7285b4fddfaedfc' //serpstackAPI KEY
 var searchList = "";
 var searchListUrl = "";
 //Date and time
@@ -45,7 +45,7 @@ function searchQuery(searchCity) {
     let foodType = ["hibachi", "italian", "seafood", "pizza", "sushi", "burger", "steak", "mexican", "indian"]; //choices for retaurant
     var query = $("#searchQuery").find(":selected").attr("id")  //Grabs value from searchQuery ID in HTML
     // let activities = "+" + "activities"; // " " + latitude+ " " +longitude; //Adds "activities" to the search
-    let queryA = query + activities + '+' + searchCity; //What were actually searching
+    let queryA = query + '+' + searchCity; //What were actually searching
     let result = ''
     let x = "";
     if (query === "Restaurant") { //restaurant is selected we give it a descriptor

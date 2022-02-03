@@ -1,26 +1,26 @@
 :root {
-    --input-padding-x: .75rem;
-    --input-padding-y: .75rem;
-    --black: #000000;
-    --dark: #082a33;
-    --darkfade: #082a33be;
-    --drkmed: #871d9c;
-    --medium: #2297ac;
-    --medlit: #73d9eb;
-    --purpfade: #c427e457;
-    --tealfade: #2297ac9d;
-    --white: #ffffff;
-    font-family: 'Sora';
-    color: var(--dark);
-  }
-  /* testing */
+  --input-padding-x: .75rem;
+  --input-padding-y: .75rem;
+  --black: #000000;
+  --dark: #082a33;
+  --darkfade: #082a33be;
+  --drkmed: #871d9c;
+  --medium: #2297ac;
+  --medlit: #73d9eb;
+  --purpfade: #c427e457;
+  --tealfade: #2297ac9d;
+  --white: #ffffff;
+  font-family: 'Sora';
+  color: var(--dark);
+}
+  
 html,
 body {
   height: 100%;
 }
   
 body {
-  background:url(./images/desktop-bkg-img_compressed.jpg);
+  background:url(../images/desktop_img_compressed.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size:cover;
@@ -155,7 +155,7 @@ p {
 
 @media (max-width:600px)  {
   body {
-    background:url(./images/mobile-bkg-image_compressed.jpg);
+    background:url(../images/);
     background-position: center;
     background-repeat: no-repeat;
     background-size:cover;
@@ -170,8 +170,6 @@ p {
     justify-content: center;
   }
 }
-
-
 
 /* Button styling start*/
 .list-group {   
