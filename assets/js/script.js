@@ -50,8 +50,8 @@ function searchQuery(searchCity) {
     e.preventDefault()
 
     let foodType = ["hibachi", "italian", "seafood", "pizza", "sushi", "burger", "steak", "mexican", "indian"]; //choices for retaurant
-    var query = $("#searchQuery").val()  //Grabs value from searchQuery ID in HTML
-    let activities = "+" + "activities"; // " " + latitude+ " " +longitude; //Adds "activities" to the search
+    var query = $("#searchQuery").find(":selected").attr("id")  //Grabs value from searchQuery ID in HTML
+    // let activities = "+" + "activities"; // " " + latitude+ " " +longitude; //Adds "activities" to the search
     let queryA = query + activities + '+' + searchCity; //What were actually searching
     let result = ''
     let x = "";
@@ -70,7 +70,7 @@ function searchQuery(searchCity) {
         console.log(queryA)
         console.log(data.local_results[0].title)
         searchList = data.local_results[0].title
-        searchListUrl = "https://www.google.com/search?q=${searchList}"
+        searchListUrl = `https://www.google.ca/search?q=${searchList}`
       //What will be displayed
           result = `
         <h3>${data.local_results[0].title}</h3><br><a target="_blank" href="https://www.google.com/search?q=${data.local_results[0].title}">Search ${data.local_results[0].title} on Google</a>
