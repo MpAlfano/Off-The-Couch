@@ -1,4 +1,4 @@
-var API_KEY = 'd61824ced86a8c06bbc1a701c59c52f4' //serpstackAPI KEY
+var API_KEY = 'bc5959f7670188cce52f425b8b348f13' //serpstackAPI KEY
 var searchList = "";
 var searchListUrl = "";
 //Date and time
@@ -45,11 +45,12 @@ function searchQuery(searchCity) {
     let foodType = ["hibachi", "italian", "seafood", "pizza", "sushi", "burger", "steak", "mexican", "indian"]; //choices for retaurant
     var query = $("#searchQuery").find(":selected").attr("id")  //Grabs value from searchQuery ID in HTML
     // let activities = "+" + "activities"; // " " + latitude+ " " +longitude; //Adds "activities" to the search
-    let queryA = query + activities + '+' + searchCity; //What were actually searching
+    let queryA = query + '+' + searchCity; //What were actually searching
     let result = ''
     let x = "";
     if (query === "Restaurant") { //restaurant is selected we give it a descriptor
       x = Math.floor(Math.random() * 9)
+      y = Math.floor(Math.random() * 3)
       console.log(x)
       queryA = foodType[x] + "+" + query + "+" + searchCity
       var url = 'http://api.serpstack.com/search?access_key=' + API_KEY + "&type=web&num=1&google_domain=google.ca" + "&query=" + queryA
@@ -60,11 +61,11 @@ function searchQuery(searchCity) {
         console.log(data)
         console.log(queryA)
         console.log(data.local_results[0].title)
-        searchList = data.local_results[0].title
+        searchList = data.local_results[y].title
         searchListUrl = `https://www.google.ca/search?q=${searchList}`
       //What will be displayed
           result = `
-        <h3>${data.local_results[0].title}</h3><br><a target="_blank" href="https://www.google.com/search?q=${data.local_results[0].title}">Search ${data.local_results[0].title} on Google</a>
+        <h3>${data.local_results[0].title}</h3><br><a target="_blank" href="https://www.google.com/search?q=${data.local_results[y].title}">Search ${data.local_results[y].title} on Google</a>
         <p>${data.local_results[0].address}</p>
           `
           $("#result").append(result)
@@ -82,22 +83,40 @@ function searchQuery(searchCity) {
         $("#result").html('')
         console.log(data)
         console.log(queryA)
-        console.log(data.organic_results[0].title)
-        searchList = data.organic_results[0].title
-        searchListUrl = data.organic_results[0].url
-        // searchListUrl = data.organic_results.url
-        data.organic_results.forEach(res => {
-          //What will be displayed
+
+        console.log(data.organic_results[0])
+
+        if (data.organic_results[0] == undefined) {
+        searchList = data.local_results[0].title
+        searchListUrl = `https://www.google.ca/search?q=${searchList}`
+
           result = `
-          <h3>${res.title}</h3><br><a target="_blank" href="${res.url}">${res.url}</a>
-          <p>${res.snippet}</p>
-          `;
-          //Appends to #result in HTML
-          hideLoading()
-          updateSearch(searchList)
+        <h3>${data.local_results[0].title}</h3><br><a target="_blank" href="https://www.google.com/search?q=${data.local_results[0].title}">Search ${data.local_results[0].title} on Google</a>
+        <p>${data.local_results[0].address}</p>
+          `
           $("#result").append(result)
-          
+        
+                  //Appends to #result in HTML
+                  hideLoading()
+                  updateSearch(searchList, searchListUrl)
+                  console.log(result)
+
+        } else {
+          searchList = data.organic_results[0].title
+          searchListUrl = data.organic_results[0].url
+          // searchListUrl = data.organic_results.url
+          data.organic_results.forEach(res => {
+            //What will be displayed
+            result = `
+            <h3>${res.title}</h3><br><a target="_blank" href="${res.url}">${res.url}</a>
+            <p>${res.snippet}</p>
+            `;
+            //Appends to #result in HTML
+            hideLoading()
+            updateSearch(searchList)
+            $("#result").append(result)    
         });
+        }  
       });
     }
   });
@@ -174,7 +193,7 @@ const fetchLocationName =  (position) => {
       console.log(responseJson.results[0].locations[0].adminArea5)
       console.log(
         'ADDRESS GEOCODE is BACK!! => ' + JSON.stringify(responseJson),
-        searchCity = responseJson.results[0].locations[0].adminArea5 + "+" + responseJson.results[0].locations[0].adminArea3
+        searchCity = responseJson.results[0].locations[0].adminArea5 + "+" + responseJson.results[0].locations[0].adminArea3 + "+" + responseJson.results[0].locations[0].adminArea1
         
       );
       searchQuery(searchCity)
@@ -224,6 +243,7 @@ function updateSearch(searchList) {  //saves search to localstorage
   searchListUrlSave.unshift(searchListUrl)
   if (searchListSave.length && searchListUrlSave.length > 5) {
     searchListSave.pop(); // removes the first element from an array 
+    searchListUrlSave.pop();
 }
   console.log(searchList)
   console.log(searchListSave)

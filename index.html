@@ -4,56 +4,46 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-      crossorigin="anonymous" />
-    <link
-      rel="stylesheet"
-
-    />
-    <link rel="stylesheet" href="./assets/css/hover.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;500;600;800&display=swap" rel="stylesheet">
     <link rel="shortcut icon" type="image/jpg" href="https://img.icons8.com/color/48/000000/couch_potato.png"/>
-
+    <link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/css/hover.css" />
     <link rel="stylesheet" href="./assets/css/style.css" />
 
     <title>Off The Couch</title>
   </head>
   <body>
-    <span class="background-image" role="img" aria-label="Floral couch with a giant potato on it"></span>
-    <div class="container">
-    <form class="form-signin">
-      <div class="text-center">
-        <div id="denied">
+        
           <span class="background-image" role="img" aria-label="Floral couch with a giant potato on it"></span>
           <main class="container">
             <form class="form-signin">
               <div class="text-center mb-4">
+                <div id="denied"></div>
+                <br>
                 <div class="recentSearch">Recent Searches</div>
-                <ul class="nav justify-content-center list-group " id="cityListGroup"> <!-- button line added local storage-->
-                <h3 class="h3 mb-3 font-weight-normal text-dark" id="datetime-p1"></h3>
-                <h3 class="h3 mb-3 font-weight-normal text-dark" id="datetime-p2"></h3>
-                <h1 class="h1 mb-3 font-weight-normal">Off The Couch</h1>
+                <h3 class="h3 mb-3" id="datetime-p1"></h3>
+                <h3 class="h3 mb-3" id="datetime-p2"></h3>
+                </ul>
+                <h1 class="h1 mb-3">Off The Couch</h1>
                 <p>Click "Let Me Pick" to select from a list of activities OR click "Pick For Me" to randomly generate an activity</p>
               </div>
-            <button type="button" id="modBtn" class="btn btn-lg btn-primary btn-block" data-bs-toggle="modal"
+            <button type="button" id="modBtn" class="btn btn-lg btn-block hvr-grow" data-bs-toggle="modal"
               data-bs-target="#searchAct">
               Let Me Pick
             </button>
-            <button class="btn btn-lg btn-primary btn-block" id="randomQ" type="submit">Pick For Me</button>
-            
+            <button class="btn btn-lg btn-block hvr-grow" id="randomQ" type="submit">Pick For Me</button>
+            <button class="btn btn-lg btn-block hvr-grow" id="randomQ" type="submit">Restaurant</button>
             </form>
-            <p id="load-text" class="mt-2 mb-3 text-muted text-center">Please Wait While Results Load</p>
+            <p id="load-text" class="mt-2 mb-3 text-center">Please Wait While Results Load</p>
             <div id="loading"></div>
             <article class="container results">
               <div id="result"></div>
             </article>
+            <article class="container results">
+              <ul class="nav justify-content-center" id="cityListGroup"> <!-- button line added local storage--></ul>
+            </article>
           </main>
-
 
             <!-- Modal -->
             <div class="modal fade" id="searchAct" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -66,31 +56,29 @@
                 <div class="modal-body">
                   <form id="form" autocomplete="off">
                       <select class="form-control input-lg" id="searchQuery">
-                        <!-- work in progress -->
-                        <option id="Ski slopes">Go Skiing or snowboarding</option> 
+
                         <option id="places to go hiking">Go hiking</option>
                         <option id="places to canoe">Go canoeing</option>
         <!-- First option for Burlington has no description so can't grab?? the hell  -->
-                        <option id="Local museum">Go check out a museum</option>
+                        <option id="museum">Go check out a museum</option>
+                        <!-- local museums list -->
                         <option id="art gallery">Go see an art gallery</option>
           <!-- Use an online site or can shrink to a place to buy board games? -->
-                        <option id="boardgame">Play a boardgames</option>
+                        <option id="boardgames -reddit">Play a boardgame</option>
             <!-- Need 2nd search to get an exact link or keep google search link -->
-                        <option id="restaurant">See nearby restaurants</option>
-                        
-                        <option id="Swimming pools">Go swimming at an indoor pool</option>
+                        <option id="Restaurant">Find a random restaurant</option>
+                      <option id="Swimming pools">Go swimming at an indoor pool</option>
             <!-- Use an online link or replace? -->
                         <option id="chess online">Play some chess</option>
       <!-- Have direct to a link or top movies to watch current year  -->
-                        <option id="movie theatre">Watch a movie</option>
+                        <option id="movie theatre cineplex">Go see a movie</option>
+                        <option id="arts and crafts ideas [online] ">Do some arts and crafts</option>
 
-                        <option id="painting supplies">Do some painting</option>
                                 <!--Change search  -->
                         <option id="pottery class online">Take a pottery class</option>
                                  <!--Change search  -->
                         <option id="archery centre">Try out archery</option>
                                  <!--Change to virtual?  -->
-                        <option id="cooking class">Take a Cooking Class</option>
                         <option id="axe throwing">Go axe throwing</option>
                                  <!--not working for me Change search params  -->
                         <option id="escape rooms">Try an escape room</option>
@@ -110,22 +98,19 @@
                         <option id="top reads for fun">Read a book</option>
                         <option id="glow in the dark mini-putt">Play mini-golf</option>
 
-
-
                       </select>
 
                     </form>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="saveSearch">Search</button>      
+                        <button type="button" class="btn hvr-grow" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn hvr-grow" id="saveSearch">Search</button>      
                       </div>
                     </div>
                   </div>
                 </div>
-              </section>
+              </div>
 
-
-
+                
 
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>

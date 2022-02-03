@@ -20,7 +20,7 @@ body {
 }
   
 body {
-  background:url(./images/desktop-bkg-img_compressed.jpg);
+  background:url(../images/desktop-bkg-img_compressed.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size:cover;
@@ -155,7 +155,7 @@ p {
 
 @media (max-width:600px)  {
   body {
-    background:url(./images/mobile-bkg-image_compressed.jpg);
+    background:url(../images/mobile-bkg-image_compressed.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size:cover;
@@ -178,7 +178,7 @@ p {
   list-style: none;
 }
 
-.list-group .oldCity {
+.oldCity {
   color: white;
   border: 1px solid #eee;
   border-radius: 10px;
