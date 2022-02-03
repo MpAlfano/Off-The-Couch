@@ -83,6 +83,7 @@ function searchQuery(searchCity) {
         $("#result").html('')
         console.log(data)
         console.log(queryA)
+
         console.log(data.organic_results[0])
 
         if (data.organic_results[0] == undefined) {
