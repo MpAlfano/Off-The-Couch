@@ -34,6 +34,7 @@ $(document).ready(function(){
     $('#searchAct').modal('toggle');
     return false;
   });
+
 //Selected Activity using serpstackAPI(uses google search)
 //use res. "console.log ID"
 //Grabbing from organic_results
@@ -214,8 +215,10 @@ function(error) {
      //Appends to #denied in HTML
      $("#denied").append(result)
 });
+
 var searchListSave = [];
 var searchListUrlSave = [];
+
 function updateSearch(searchList) {  //saves search to localstorage
   searchListSave.unshift(searchList)
   searchListUrlSave.unshift(searchListUrl)
@@ -230,6 +233,8 @@ function updateSearch(searchList) {  //saves search to localstorage
   console.log(searchList + searchListUrl)
   return showSearchList(searchList, searchListUrl);
 }
+
+
 function init() {  //function to load the text from memory
   searchListSave = JSON.parse(localStorage.getItem("searchListSave"));
   searchListUrlSave = JSON.parse(localStorage.getItem("searchListUrlSave"));
@@ -249,8 +254,9 @@ function init() {  //function to load the text from memory
     var varText = "";
     cityListEl.innerHTML = "";
     for (var i = 0; i < searchListSave.length; i++) {
- 
+
       var li = document.createElement('a');
+
       var linkText = document.createTextNode(searchListSave[i]);
       li.appendChild(linkText);
       li.setAttribute("class", "oldCity")
@@ -260,4 +266,6 @@ function init() {  //function to load the text from memory
     }
       
   }
+
 init()
+
