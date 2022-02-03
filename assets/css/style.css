@@ -177,8 +177,8 @@ p {
     background-position: center;
     background-repeat: no-repeat;
     background-size:cover;
-    overflow:hidden;
-    height: 75vh;
+    overflow:scroll;
+    height: 125vh;
     display: flex;
     -ms-flex-align: center;
     -ms-flex-pack: center;
@@ -187,3 +187,21 @@ p {
     -webkit-box-pack: center;
     justify-content: center;
   }
+}
+.list-group {  
+  list-style: none;
+}
+.oldCity {
+  color: white;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  text-align: left;
+  background: rgba(24,24,27, 0.6);
+  cursor: pointer;
+}
+.oldCity:hover {
+  color: var(--white);
+  color: var(--medlit);
+}
