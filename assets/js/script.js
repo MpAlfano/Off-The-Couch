@@ -6,7 +6,6 @@ var datetimeP1 = null,
         date = null;
 var datetimeP2 = null,
     date = null;
-
 //Date formats, first is day/month/year
 var update = function () {
     date = moment(new Date())
@@ -21,8 +20,6 @@ $(document).ready(function(){
     update();
     setInterval(update, 1000);
 });
-
-
 // Opens Modal on click of "search topic" button
 $(document).ready(function(){
     $("#modBtn").click(function(){
@@ -36,10 +33,7 @@ $(document).ready(function(){
     e.preventDefault();
     $('#searchAct').modal('toggle');
     return false;
-
   });
-
-
 
 //Selected Activity using serpstackAPI(uses google search)
 //use res. "console.log ID"
@@ -48,19 +42,16 @@ $(document).ready(function(){
 function searchQuery(searchCity) {
   $('#saveSearch').on('click', function (e) {
     e.preventDefault()
-
     let foodType = ["hibachi", "italian", "seafood", "pizza", "sushi", "burger", "steak", "mexican", "indian"]; //choices for retaurant
     var query = $("#searchQuery").find(":selected").attr("id")  //Grabs value from searchQuery ID in HTML
     // let activities = "+" + "activities"; // " " + latitude+ " " +longitude; //Adds "activities" to the search
     let queryA = query + activities + '+' + searchCity; //What were actually searching
     let result = ''
     let x = "";
-
     if (query === "Restaurant") { //restaurant is selected we give it a descriptor
       x = Math.floor(Math.random() * 9)
       console.log(x)
       queryA = foodType[x] + "+" + query + "+" + searchCity
-
       var url = 'http://api.serpstack.com/search?access_key=' + API_KEY + "&type=web&num=1&google_domain=google.ca" + "&query=" + queryA
       console.log(url);
       displayLoading()
@@ -102,7 +93,6 @@ function searchQuery(searchCity) {
           <p>${res.snippet}</p>
           `;
           //Appends to #result in HTML
-
           hideLoading()
           updateSearch(searchList)
           $("#result").append(result)
@@ -112,15 +102,11 @@ function searchQuery(searchCity) {
     }
   });
 }
-
-
 // Random activity using BoredAPI
 // use data."console.log ID"
 let boredUrl = "https://www.boredapi.com/api/activity/"
-
 //Random button on click
 $('#randomQ').on('click', function(e){
-
   e.preventDefault()
   searchQuery(searchCity)
   fetch(boredUrl)
@@ -131,7 +117,6 @@ $('#randomQ').on('click', function(e){
       }
       console.log(response.json);
       return response.json();
-
     })
     .then(function (data) {
       console.log(data);
@@ -139,11 +124,8 @@ $('#randomQ').on('click', function(e){
       resultRandom = data.activity
       var randomQuery = resultRandom +"+"+ searchCity
       searchRandom(resultRandom, randomQuery)
-
 });
 });
-
-
 //Grabs activity from bored api, grabs location from mapquest api, then searches using serpstack api
 function searchRandom(resultRandom, randomQuery) {
   var url = 'http://api.serpstack.com/search?access_key='  + API_KEY+"&type=web&num=1&google_domain=google.ca"+"&query=" +randomQuery
@@ -171,11 +153,7 @@ function searchRandom(resultRandom, randomQuery) {
           
       });
   });
-
 }
-
-
-
 //Mapquest api to fetch location based off geoLocation, only works if user clicks allow. 
 const fetchLocationName =  (position) => {
   
@@ -195,19 +173,15 @@ const fetchLocationName =  (position) => {
       console.log(responseJson.results[0].locations[0])
       console.log(responseJson.results[0].locations[0].adminArea5)
       console.log(
-
         'ADDRESS GEOCODE is BACK!! => ' + JSON.stringify(responseJson),
         searchCity = responseJson.results[0].locations[0].adminArea5 + "+" + responseJson.results[0].locations[0].adminArea3
         
       );
       searchQuery(searchCity)
     });
-
 };
-
 // Runs this function on page load
 // fetchLocationName()
-
 //DIsplays while api loads data
 const loader = document.querySelector("#loading");
 const loaderText = document.querySelector("#load-text");
@@ -221,15 +195,11 @@ function displayLoading() {
       loaderText.classList.remove("display");
   }, 10000);
 }
-
 //Hiding Loading 
 function hideLoading() {
   loader.classList.remove("display");
   loaderText.classList.remove("display");
 }
-
-
-
 // Geolocation denied
 navigator.geolocation.getCurrentPosition(function(position) {
   console.log("allowed");
@@ -246,7 +216,6 @@ function(error) {
      $("#denied").append(result)
 });
 
-
 var searchListSave = [];
 var searchListUrlSave = [];
 
@@ -261,10 +230,10 @@ function updateSearch(searchList) {  //saves search to localstorage
   console.log(searchListUrlSave)
   localStorage.setItem("searchListSave", JSON.stringify(searchListSave)); //saves searchList
   localStorage.setItem("searchListUrlSave", JSON.stringify(searchListUrlSave)); //saves searchList
-
   console.log(searchList + searchListUrl)
   return showSearchList(searchList, searchListUrl);
 }
+
 
 function init() {  //function to load the text from memory
   searchListSave = JSON.parse(localStorage.getItem("searchListSave"));
@@ -277,7 +246,6 @@ function init() {  //function to load the text from memory
     searchListUrlSave = [];
     return searchListSave;
   }
-
     return showSearchList();
     
   }
@@ -286,8 +254,6 @@ function init() {  //function to load the text from memory
     var varText = "";
     cityListEl.innerHTML = "";
     for (var i = 0; i < searchListSave.length; i++) {
- 
-
 
       var li = document.createElement('a');
 
@@ -297,12 +263,9 @@ function init() {  //function to load the text from memory
       li.title = "";
       li.href = searchListUrlSave[i];
       $("#cityListGroup").append(li);
-
     }
       
   }
 
 init()
-
-
 
