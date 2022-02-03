@@ -1,4 +1,4 @@
-var API_KEY = '456f3fd03724ed1cfa76405f602f5514' //serpstackAPI KEY
+var API_KEY = '487e604fe405f30896b54180da178118' //serpstackAPI KEY
 
 //Date and time
 var datetimeP1 = null,
@@ -37,7 +37,7 @@ $(document).ready(function(){
     return false;
 
   });
-});
+
 
 
 //Selected Activity using serpstackAPI(uses google search)
@@ -49,13 +49,14 @@ function searchQuery(searchCity) {
     e.preventDefault()
 
     let foodType = ["hibachi", "italian", "seafood", "pizza", "sushi", "burger", "steak", "mexican", "indian"]; //choices for retaurant
-    var query = $("#searchQuery").val()  //Grabs value from searchQuery ID in HTML
+    var query = $("#searchQuery").find(":selected").attr("id")  //Grabs value from searchQuery ID in HTML
+    console.log(query)
     let activities = "+" + "activities"; // " " + latitude+ " " +longitude; //Adds "activities" to the search
-    let queryA = query + activities + '+' + searchCity; //What were actually searching
+    let queryA = query + '+' + searchCity; //What were actually searching
     let result = ''
     let x = "";
 
-    if (query === "Restaurant") { //restaurant is selected we give it a descriptor
+    if (query === "restaurant") { //restaurant is selected we give it a descriptor
       x = Math.floor(Math.random() * 10)
       console.log(x)
       queryA = foodType[x] + "+" + query + "+" + searchCity
@@ -180,7 +181,7 @@ const fetchLocationName =  (position) => {
       console.log(
 
         'ADDRESS GEOCODE is BACK!! => ' + JSON.stringify(responseJson),
-        searchCity = responseJson.results[0].locations[0].adminArea5 + "+" + responseJson.results[0].locations[0].adminArea3
+        searchCity = responseJson.results[0].locations[0].adminArea5 + "+" + responseJson.results[0].locations[0].adminArea3 + "+" + responseJson.results[0].locations[0].adminArea1
         
       );
       searchQuery(searchCity)
