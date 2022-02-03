@@ -1,6 +1,5 @@
 /* Resets the box size of every element */
 * {
-    padding-bottom: 15px;
     box-sizing: border-box;
   }
   
@@ -47,7 +46,7 @@
   input, select, option, optgroup, textarea, button,
   pre, code {
     font-size: 100%;
-    font-family: inherit;
+    font-family: Sora;
   }
   
   /* Removes default bullet points from lists */
@@ -57,5 +56,4 @@
 
   .btn {
       background-color: grey;
-      margin: 10px;
   }
