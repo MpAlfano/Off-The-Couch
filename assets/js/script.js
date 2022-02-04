@@ -300,5 +300,6 @@ function showSearchList() {  //hides the list of cities chosen in the past
   }
 }
 // Runs this function on page load
+
 init();
 
