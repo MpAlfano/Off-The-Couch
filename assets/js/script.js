@@ -52,7 +52,7 @@ $('#restaurantSearch').on('click', function (e) {
   queryA = foodType[x] + "+" + "retaurant" + "+" + searchCity
   let url = 'https://cors-anywhere.herokuapp.com/http://api.serpstack.com/search?access_key=' + API_KEY + "&type=web&num=1&google_domain=google.ca" + "&query=" + queryA
   console.log(url);
-  hideLoading()
+  displayLoading()
   $.get(url, function (data) {
     $("#result").html('')
     console.log(data)
@@ -86,13 +86,13 @@ function searchQuery(searchCity) {
 
     let url = 'https://cors-anywhere.herokuapp.com/http://api.serpstack.com/search?access_key=' + API_KEY + "&type=web&num=1&google_domain=google.ca" + "&query=" + queryA
     console.log(url);
-    hideLoading()
+    displayLoading()
     $.get(url, function (data) {
       $("#result").html('')
       console.log(data)
       console.log(queryA)
       console.log(data.organic_results[0])
-
+      hideLoading()
       //If no organic results then take local result
       if (data.organic_results[0] == undefined) {
         searchList = data.local_results[0].title
@@ -103,7 +103,6 @@ function searchQuery(searchCity) {
         <p>${data.local_results[0].address}</p>
           `
         $("#result").append(result)
-        hideLoading()
         updateSearch(searchList, searchListUrl)
         console.log(result)
       } else {
@@ -130,7 +129,6 @@ let boredUrl = "https://www.boredapi.com/api/activity/"
 $('#randomQ').on('click', function (e) {
   e.preventDefault()
   searchQuery(searchCity)
-
   fetch(boredUrl)
     .then(function (response) {
       console.log(response);
@@ -153,8 +151,8 @@ $('#randomQ').on('click', function (e) {
 function searchRandom(resultRandom, randomQuery) {
   let url = 'https://cors-anywhere.herokuapp.com/http://api.serpstack.com/search?access_key=' + API_KEY + "&type=web&num=1&google_domain=google.ca" + "&query=" + randomQuery
   console.log(url);
-  hideLoading()
 
+  displayLoading()
   $.get(url, function (data) {
     $("#result").html('')
 
@@ -168,7 +166,7 @@ function searchRandom(resultRandom, randomQuery) {
       <p>${data.local_results[0].address}</p>
         `
       $("#result").append(result)
-      hideLoading()
+      
       updateSearch(searchList, searchListUrl)
       console.log(result)
     } else {
@@ -220,7 +218,7 @@ let loader = document.querySelector("#loading");
 let loaderText = document.querySelector("#load-text");
 
 //hide Loading
-function hideLoading() {
+function displayLoading() {
   loader.classList.add("hide");
   loaderText.classList.add("hide");
 
