@@ -43,6 +43,7 @@ body {
   padding: 15px;
   margin: 0 auto;
   background-color: var(--tealfade);
+  border-radius: 10px;
   border-width: 2px;
   border-style: solid;
   border-color: var(--medium);
@@ -56,7 +57,12 @@ body {
 }
 
 .container .results {
+  word-wrap: break-word;
   background-color: var(--darkfade);
+  border-radius: 10px;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 .results h3 {
@@ -64,7 +70,7 @@ body {
 }
 
 .results a {
-  color: var(--medlit);
+  color: var(--white);
 }
 
 .results a:hover {
@@ -112,20 +118,27 @@ body {
 h3 {
   color: var(--dark);
   font-weight: 600;
+  text-align: center;
 }
 
 p {
-  color: var(--dark);
+  color: var(--white);
   font-weight: bold;
   text-shadow: 2px 2px 5px #1312124d;
 }
 
 /* Loader */
 #load-text {
-  visibility: hidden;
+  border-radius: 10px;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 300px;
+  color: var(--white);
+  display: none;
+  background-color: var(--darkfade);
 }
-#load-text.display {
-  visibility: visible;
+#load-text.hide {
+  display: block;
 }
 #loading {
   margin: auto;
@@ -136,12 +149,12 @@ p {
   border: 5px solid #f3f3f3;
   border-top: 6px solid var(--drkmed);
   border-radius: 100%;
-  visibility: hidden;
+  display: none;
   animation: spin 1s infinite linear;
 }
 
-#loading.display {
-  visibility: visible;
+#loading.hide {
+  display: block;
 }
 
 @keyframes spin {
@@ -159,8 +172,8 @@ p {
     background-position: center;
     background-repeat: no-repeat;
     background-size:cover;
-    overflow:hidden;
-    height: 75vh;
+    height: 125vh;
+    overflow: scroll;
     display: flex;
     -ms-flex-align: center;
     -ms-flex-pack: center;
@@ -172,20 +185,57 @@ p {
 }
 
 
+.infoText {
+  color: var(--dark);
+  font-weight: bold;
+  text-shadow: 2px 2px 5px #1312124d;
+}
+
+.recentSearchBox {
+  border-radius: 10px;
+  margin: 0 auto;
+  background-color: var(--darkfade);
+}
+
+.recentSearch {
+  padding: 10px;
+  color: var(--white);
+}
 
 /* Button styling start*/
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:active {
+  text-decoration: none;
+}
 .list-group {   
   list-style: none;
 }
 
 .oldCity {
   color: white;
+  list-style: none;
   border: 1px solid #eee;
   border-radius: 10px;
   padding: 10px;
   margin: 10px;
   text-align: left;
-  background: rgba(24,24,27, 0.6);
+  background-color: var(--darkfade);
   cursor: pointer; 
+}
+
+.oldCity:hover {
+  color: var(--white);
+  color: var(--medlit);
 }
  /* Button styling end */
