@@ -261,7 +261,7 @@ function updateSearch(searchList) {  //saves search to localstorage
   if (searchListSave.length && searchListUrlSave.length > 5) {
     searchListSave.pop(); // removes the first element from an array 
     searchListUrlSave.pop();
-  }
+
   console.log(searchList)
   console.log(searchListSave)
   console.log(searchListUrlSave)
