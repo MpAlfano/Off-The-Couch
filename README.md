@@ -13,6 +13,7 @@ An application that can take a variety of user inputs such as location, interest
 - [BORED API](https://www.boredapi.com/documentation/) 
 - [SERPSTACK API](https://serpstack.com/documentation/) 
 - [WIREFRAME.CC](https://wireframe.cc/) 
+- [HOVER.CSS](https://ianlunn.github.io/Hover/) 
 
 ## Sample Website
 [DEMO LINK](https://MpAlfano.github.io/Off-The-Couch/) 
@@ -21,12 +22,16 @@ An application that can take a variety of user inputs such as location, interest
 📦Off-The-Couch
  ┣ 📂assets
  ┃ ┣ 📂css
+ ┃ ┃ ┣ 📜hover.css
  ┃ ┃ ┣ 📜reset.css
  ┃ ┃ ┗ 📜style.css
  ┃ ┣ 📂images
+ ┃ ┃ ┣ 📜desktop-bkg-img.JPEG
+ ┃ ┃ ┣ 📜desktop-bkg-img_compressed.jpg
+ ┃ ┃ ┣ 📜mobile-bkg-image.JPEG
+ ┃ ┃ ┣ 📜mobile-bkg-image_compressed.jpg
  ┃ ┃ ┗ 📜screenshot.png
  ┃ ┣ 📂js
- ┃ ┃ ┣ 📜randomActs.js
  ┃ ┃ ┗ 📜script.js
  ┃ ┗ 📜.DS_Store
  ┣ 📜.DS_Store
@@ -41,7 +46,7 @@ An application that can take a variety of user inputs such as location, interest
 ## Usage
 - An activity application to get you off the couch.
 ## Screenshot
-![Website full page screenshot](/assets/images/screenshot.png) // To be changed
+![Website full page screenshot](/assets/images/screenshot.png)
 
 
 ## License
