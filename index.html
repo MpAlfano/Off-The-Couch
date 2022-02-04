@@ -4,109 +4,83 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;500;600;800&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" type="image/jpg" href="https://img.icons8.com/color/48/000000/couch_potato.png"/>
-    <link rel="stylesheet"
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;500;600;800&display=swap" />
+    <link rel="shortcut icon" href="https://img.icons8.com/color/48/000000/couch_potato.png" type="image/jpg" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
     <link rel="stylesheet" href="./assets/css/hover.css" />
     <link rel="stylesheet" href="./assets/css/style.css" />
-
     <title>Off The Couch</title>
   </head>
+
   <body>
-          <span class="background-image" role="img" aria-label="Floral couch with a giant potato on it"></span>
-          <main class="container">
-            <form class="form-signin">
-              <div class="text-center mb-4">
-                <div id="denied"></div>
-                <br>
-                <div class="recentSearch"></div>
-                <h3 class="h3 mb-3" id="datetime-p1"></h3>
-                <h3 class="h3 mb-3" id="datetime-p2"></h3>
-                </ul>
+      <span class="background-image" role="img" aria-label="Floral couch with a giant potato on it"></span>
+        <main class="container">
+          <form class="form-signin">
+            <div class="text-center mb-4">
+              <div id="denied"></div>
+                  <h3 class="h3 mt-3 mb-3" id="datetime-p1"></h3>
+                  <h3 class="h3 mb-3" id="datetime-p2"></h3>
                 <h1 class="h1 mb-3">Off The Couch</h1>
-                <p>Click "Let Me Pick" to select from a list of activities OR click "Pick For Me" to randomly generate an activity</p>
-              </div>
-            <button type="button" id="modBtn" class="btn btn-lg btn-block hvr-grow" data-bs-toggle="modal"
-              data-bs-target="#searchAct">
-              Let Me Pick
-            </button>
+                <p class="infoText">Click "Let Me Pick" to select from a list of activities OR click "Pick For Me" to randomly generate an activity</p>
+                <p class="infoText">If hungry select "Discover a New Restaurant"</p>
+            </div>
+            <button type="button" id="modBtn" class="btn btn-lg btn-block hvr-grow" data-bs-toggle="modal" data-bs-target="#searchAct">Let Me Pick</button>
             <button class="btn btn-lg btn-block hvr-grow" id="randomQ" type="submit">Pick For Me</button>
-            
-            </form>
-            <p id="load-text" class="mt-2 mb-3 text-center">Please Wait While Results Load</p>
-            <div id="loading"></div>
-            <article class="container results">
-              <div id="result"></div>
+            <button class="btn btn-lg btn-block hvr-grow" id="restaurantSearch" type="submit">Discover a New Restaurant</button>
+          </form>
+
+          <p id="load-text" class="mt-2 mb-3 text-center">Please Wait While Results Load</p>
+          <div id="loading"></div>
+          <article class="container results mt-4">
+            <div id="result"></div>
+          </article>
+          <article class="container recentSearchBox mt-4">
+            <div class="recentSearch h3 text-center mb-2">Recent Searches</div>
+            <ul class="nav justify-content-center" id="cityListGroup"></ul>
+          </article>
+        </main>
+
+      <section class="modal fade" id="searchAct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content bg-light">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Off The Couch</h5>
+            </div>
+            <article class="modal-body">
+              <form id="form" autocomplete="off">
+                <select class="form-control input-lg" id="searchQuery">
+                  <option id="places to go hiking">Go hiking</option>
+                  <option id="places to canoe">Go canoeing</option>
+                  <option id="museum">Go check out a museum</option>
+                  <option id="art gallery">Go see an art gallery</option>
+                  <option id="boardgames -reddit">Play a boardgame</option>
+                  <option id="Swimming pools">Go swimming at an indoor pool</option>
+                  <option id="chess online">Play some chess</option>
+                  <option id="movie theatre cineplex">Go see a movie</option>
+                  <option id="arts and crafts ideas [online] ">Do some arts and crafts</option>
+                  <option id="pottery class online">Take a pottery class</option>
+                  <option id="archery centre">Try out archery</option>
+                  <option id="cooking class [online]">Learn some cooking tips</option>
+                  <option id="axe throwing">Go axe throwing</option>
+                  <option id="escape rooms">Try an escape room</option>
+                  <option id="gardening guide">Do some gardening</option>
+                  <option id="rock climbing recreational">Go rock climbing</option>
+                  <option id="play squash">Play some squash</option>
+                  <option id="go biking">Go on a bike ride</option>
+                  <option id="yoga studio">Take a yoga class</option>
+                  <option id="ddo.com">Play dungeons & dragons</option>
+                  <option id="top reads for fun">Read a book</option>
+                  <option id="glow in the dark mini-putt">Play mini-golf</option>
+                </select>
+              </form>
             </article>
-            <article class="container results">
-              <ul class="nav justify-content-center" id="cityListGroup"> <!-- button line added local storage--></ul>
-            </article>
-          </main>
-
-            <!-- Modal -->
-            <div class="modal fade" id="searchAct" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content bg-light">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Off The Couch</h5>
-                </div>
-                <div class="modal-body">
-                  <form id="form" autocomplete="off">
-                      <select class="form-control input-lg" id="searchQuery">
-                        <option id="places to go hiking">Go hiking</option>
-                        <option id="places to canoe">Go canoeing</option>
-        <!-- First option for Burlington has no description so can't grab?? the hell  -->
-                        <option id="Local museums list">Go check out a museum</option>
-                        <option id="art gallery">Go see an art gallery</option>
-          <!-- Use an online site or can shrink to a place to buy board games? -->
-                        <option id="boardgame">Play a boardgames</option>
-            <!-- Need 2nd search to get an exact link or keep google search link -->
-                        <option id="Restaurant">See nearby restaurants</option>
-                        
-                        <option id="Swimming pools">Go swimming at an indoor pool</option>
-            <!-- Use an online link or replace? -->
-                        <option id="chess online">Play some chess</option>
-      <!-- Have direct to a link or top movies to watch current year  -->
-                        <option id="movie theatre">Watch a movie</option>
-
-                        <option id="painting supplies">Do some painting</option>
-                                <!--Change search  -->
-                        <option id="pottery class online">Take a pottery class</option>
-                                 <!--Change search  -->
-                        <option id="archery centre">Try out archery</option>
-                                 <!--Change to virtual?  -->
-                        <option id="cooking class">Take a Cooking Class</option>
-                        <option id="axe throwing">Go axe throwing</option>
-                                 <!--not working for me Change search params  -->
-                        <option id="escape rooms">Try an escape room</option>
-                             <!--Change search to gardening guide?  -->
-                        <option id="gardening guide">Do some gardening</option>
-                               <!--Not working for me -->
-                        <option id="rock climbing recreational">Go rock climbing</option>
-          <!--Change search maybe take out too specific to some cities  -->
-                        <option id="play squash">Play some squash</option>
-                             <!--Extra searching required  -->
-                        <option id="go biking">Go on a bike ride</option>
-                             <!--Change search -groupon -->
-                        <option id="yoga studio">Take a yoga class</option>
-                             <!--Change search direct to an online place to play? -->
-                        <option id="ddo.com">Play dungeons & dragons</option>
-                               <!--List of top books to read?  -->
-                        <option id="top reads for fun">Read a book</option>
-                        <option id="glow in the dark mini-putt">Play mini-golf</option>
-                      </select>
-
-                    </form>
-                      <div class="modal-footer">
-                        <button type="button" class="btn hvr-grow" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn hvr-grow" id="saveSearch">Search</button>      
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div class="modal-footer">
+              <button type="button" class="btn hvr-grow" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn hvr-grow" id="saveSearch">Search</button>      
+            </div>
+          </div>
+        </div>
+      </section>
 
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>

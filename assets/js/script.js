@@ -1,132 +1,136 @@
-var API_KEY = '87cf9406de06e84ff7285b4fddfaedfc' //serpstackAPI KEY
-var searchList = "";
-var searchListUrl = "";
+let API_KEY = '00ba0bd4007f2a4c26f620068ba9dc36' //serpstackAPI KEY
+let searchList = "";
+let searchListUrl = "";
 //Date and time
-var datetimeP1 = null,
-        date = null;
-var datetimeP2 = null,
-    date = null;
-//Date formats, first is day/month/year
-var update = function () {
-    date = moment(new Date())
-    datetimeP1.html(date.format('dddd, MMM Do, YY'));
-    //current time
-    datetimeP2.html(date.format('h:mm a'));
-};
-//Time updater, updates every 1sec
-$(document).ready(function(){
-    datetimeP1 = $('#datetime-p1')
-    datetimeP2 = $('#datetime-p2')
-    update();
-    setInterval(update, 1000);
-});
-// Opens Modal on click of "search topic" button
-$(document).ready(function(){
-    $("#modBtn").click(function(){
-      $("#searchAct").modal();
-    });
-  });
- 
-  
-  // Closes modal on click of "search" button
-  $('#saveSearch').click(function(e) {
-    e.preventDefault();
-    $('#searchAct').modal('toggle');
-    return false;
-  });
+let date = null;
+let datetimeP1 = null;
+let datetimeP2 = null;
 
-//Selected Activity using serpstackAPI(uses google search)
-//use res. "console.log ID"
-//Grabbing from organic_results
-//Search Button on click
+
+//Date formats, first is day/month/year
+let update = function () {
+  date = moment(new Date())
+  datetimeP1.html(date.format('dddd, MMM Do, YY'));
+  //current time
+  datetimeP2.html(date.format('h:mm a'));
+};
+
+//Time updater, updates every 1sec
+$(document).ready(function () {
+  datetimeP1 = $('#datetime-p1')
+  datetimeP2 = $('#datetime-p2')
+  update();
+  setInterval(update, 1000);
+});
+
+// Opens Modal on click of "search topic" button
+$(document).ready(function () {
+  $("#modBtn").click(function () {
+    $("#searchAct").modal();
+  });
+});
+
+// Closes modal on click of "search" button
+$('#saveSearch').click(function (e) {
+  e.preventDefault();
+  $('#searchAct').modal('toggle');
+  return false;
+});
+
+//Restaurant search Button on click
+$('#restaurantSearch').on('click', function (e) {
+  e.preventDefault()
+  e.stopImmediatePropagation()
+  searchQuery(searchCity)
+  //choices for retaurant
+  let foodType = ["hibachi", "italian", "seafood", "pizza", "sushi", "burger", "steak", "indian", "thai", "greek", "mediterranean", "jamaican", "bbq"];
+  let result = ''
+
+  x = Math.floor(Math.random() * 12)
+  y = Math.floor(Math.random() * 3)
+  console.log(x)
+  queryA = foodType[x] + "+" + "retaurant" + "+" + searchCity
+  let url = 'http://api.serpstack.com/search?access_key=' + API_KEY + "&type=web&num=1&google_domain=google.ca" + "&query=" + queryA
+  console.log(url);
+  hideLoading()
+  $.get(url, function (data) {
+    $("#result").html('')
+    console.log(data)
+    console.log(data.local_results[y].title)
+    searchList = data.local_results[y].title
+    searchListUrl = `https://www.google.ca/search?q=${searchList}`
+
+    //What will be hideed
+    result = `
+        <h3>${data.local_results[y].title}</h3><br><a target="_blank" href="https://www.google.com/search?q=${data.local_results[y].title}">Search ${data.local_results[y].title} on Google</a>
+        <p>${data.local_results[y].address}</p>
+          `
+    $("#result").append(result)
+
+    //Appends to #result in HTML
+    hideLoading()
+    updateSearch(searchList, searchListUrl)
+  });
+  return;
+});
+
+//search function for drop down option selected
 function searchQuery(searchCity) {
+
   $('#saveSearch').on('click', function (e) {
     e.preventDefault()
-    let foodType = ["hibachi", "italian", "seafood", "pizza", "sushi", "burger", "steak", "mexican", "indian"]; //choices for retaurant
-    var query = $("#searchQuery").find(":selected").attr("id")  //Grabs value from searchQuery ID in HTML
-    // let activities = "+" + "activities"; // " " + latitude+ " " +longitude; //Adds "activities" to the search
+    e.stopImmediatePropagation()
+    let query = $("#searchQuery").find(":selected").attr("id")  //Grabs value from searchQuery ID in HTML
     let queryA = query + '+' + searchCity; //What were actually searching
     let result = ''
-    let x = "";
-    if (query === "Restaurant") { //restaurant is selected we give it a descriptor
-      x = Math.floor(Math.random() * 9)
-      y = Math.floor(Math.random() * 3)
-      console.log(x)
-      queryA = foodType[x] + "+" + query + "+" + searchCity
-      var url = 'http://api.serpstack.com/search?access_key=' + API_KEY + "&type=web&num=1&google_domain=google.ca" + "&query=" + queryA
-      console.log(url);
-      displayLoading()
-      $.get(url, function (data) {
-        $("#result").html('')
-        console.log(data)
-        console.log(queryA)
-        console.log(data.local_results[0].title)
-        searchList = data.local_results[y].title
-        searchListUrl = `https://www.google.ca/search?q=${searchList}`
-      //What will be displayed
-          result = `
-        <h3>${data.local_results[0].title}</h3><br><a target="_blank" href="https://www.google.com/search?q=${data.local_results[y].title}">Search ${data.local_results[y].title} on Google</a>
-        <p>${data.local_results[0].address}</p>
-          `
-          $("#result").append(result)
-        
-                  //Appends to #result in HTML
-                  hideLoading()
-                  updateSearch(searchList, searchListUrl)
-                  console.log(result)
-      });
-    } else {
-      var url = 'http://api.serpstack.com/search?access_key=' + API_KEY + "&type=web&num=1&google_domain=google.ca" + "&query=" + queryA
-      console.log(url);
-      displayLoading()
-      $.get(url, function (data) {
-        $("#result").html('')
-        console.log(data)
-        console.log(queryA)
-        console.log(data.organic_results[0])
 
-        if (data.organic_results[0] == undefined) {
+    let url = 'http://api.serpstack.com/search?access_key=' + API_KEY + "&type=web&num=1&google_domain=google.ca" + "&query=" + queryA
+    console.log(url);
+    hideLoading()
+    $.get(url, function (data) {
+      $("#result").html('')
+      console.log(data)
+      console.log(queryA)
+      console.log(data.organic_results[0])
+
+      //If no organic results then take local result
+      if (data.organic_results[0] == undefined) {
         searchList = data.local_results[0].title
         searchListUrl = `https://www.google.ca/search?q=${searchList}`
-
-          result = `
+        console.log(searchListUrl)
+        result = `
         <h3>${data.local_results[0].title}</h3><br><a target="_blank" href="https://www.google.com/search?q=${data.local_results[0].title}">Search ${data.local_results[0].title} on Google</a>
         <p>${data.local_results[0].address}</p>
           `
-          $("#result").append(result)
-        
-                  //Appends to #result in HTML
-                  hideLoading()
-                  updateSearch(searchList, searchListUrl)
-                  console.log(result)
-
-        } else {
-          searchList = data.organic_results[0].title
-          searchListUrl = data.organic_results[0].url
-          // searchListUrl = data.organic_results.url
-          data.organic_results.forEach(res => {
-            //What will be displayed
-            result = `
+        $("#result").append(result)
+        hideLoading()
+        updateSearch(searchList, searchListUrl)
+        console.log(result)
+      } else {
+        searchList = data.organic_results[0].title
+        searchListUrl = data.organic_results[0].url
+        data.organic_results.forEach(res => {
+          //What will be hideed
+          result = `
             <h3>${res.title}</h3><br><a target="_blank" href="${res.url}">${res.url}</a>
             <p>${res.snippet}</p>
             `;
-            //Appends to #result in HTML
-            hideLoading()
-            updateSearch(searchList)
-            $("#result").append(result)    
+          //Appends to #result in HTML
+          hideLoading()
+          updateSearch(searchList)
+          $("#result").append(result)
         });
-        }  
-      });
-    }
+      }
+    });
   });
 }
 // Random activity using BoredAPI
-// use data."console.log ID"
 let boredUrl = "https://www.boredapi.com/api/activity/"
 //Random button on click
-$('#randomQ').on('click', function(e){
+$('#randomQ').on('click', function (e) {
   e.preventDefault()
   searchQuery(searchCity)
+
   fetch(boredUrl)
     .then(function (response) {
       console.log(response);
@@ -138,52 +142,65 @@ $('#randomQ').on('click', function(e){
     })
     .then(function (data) {
       console.log(data);
-      //What will be displayed
+      //What will be hideed
       resultRandom = data.activity
-      var randomQuery = resultRandom +"+"+ searchCity
+      let randomQuery = resultRandom + "+" + searchCity
       searchRandom(resultRandom, randomQuery)
+    });
 });
-});
+
 //Grabs activity from bored api, grabs location from mapquest api, then searches using serpstack api
 function searchRandom(resultRandom, randomQuery) {
-  var url = 'http://api.serpstack.com/search?access_key='  + API_KEY+"&type=web&num=1&google_domain=google.ca"+"&query=" +randomQuery
+  let url = 'http://api.serpstack.com/search?access_key=' + API_KEY + "&type=web&num=1&google_domain=google.ca" + "&query=" + randomQuery
   console.log(url);
-  displayLoading()
-  $.get(url, function(data){
-      $("#result").html('')
+  hideLoading()
+
+  $.get(url, function (data) {
+    $("#result").html('')
+
+    //If no organic results then take local result
+    if (data.organic_results[0] == undefined) {
+      searchList = data.local_results[0].title
+      searchListUrl = `https://www.google.ca/search?q=${searchList}`
+      console.log(searchListUrl)
+      result = `
+      <h3>${data.local_results[0].title}</h3><br><a target="_blank" href="https://www.google.com/search?q=${data.local_results[0].title}">Search ${data.local_results[0].title} on Google</a>
+      <p>${data.local_results[0].address}</p>
+        `
+      $("#result").append(result)
+      hideLoading()
+      updateSearch(searchList, searchListUrl)
+      console.log(result)
+    } else {
       console.log(resultRandom)
       console.log(data.organic_results[0].url)
       dataOrg = data.organic_results;
       searchListUrl = data.organic_results[0].url
-      console.log(searchListUrl)
       description = data.knowledge_graph
       searchList = data.organic_results
       data.organic_results.forEach(res => {
-        //What will be displayed
-          result =`
-          <h3>${resultRandom}</h3><br><a target="_blank" href="${res.url}">${res.url}</a>
-          <p>${res.title}</p>
-          `
-          //Appends to #result in HTML
-          hideLoading()
-          updateSearch(resultRandom, searchListUrl)
-          $("#result").append(result)
-          
+        //What will be hideed
+        result = `
+            <h3>${resultRandom}</h3><br><a target="_blank" href="${res.url}">${res.url}</a>
+            <p>${res.title}</p>
+            `
+        hideLoading()
+        updateSearch(resultRandom, searchListUrl)
+        $("#result").append(result)
       });
+    }
   });
 }
+
 //Mapquest api to fetch location based off geoLocation, only works if user clicks allow. 
-const fetchLocationName =  (position) => {
-  
-    
-    
-    const lat  = position.coords.latitude;
-    const lng = position.coords.longitude;
-    console.log(lat)
-    console.log(lng)
- 
-   fetch(
-    'https://www.mapquestapi.com/geocoding/v1/reverse?key=PRZUpttP0TCp8zsRVAIyHZz7mpmjIupR&location='+lat+'%2C'+lng+'&outFormat=json&thumbMaps=false',
+let fetchLocationName = (position) => {
+  let lat = position.coords.latitude;
+  let lng = position.coords.longitude;
+  console.log(lat)
+  console.log(lng)
+
+  fetch(
+    'https://www.mapquestapi.com/geocoding/v1/reverse?key=PRZUpttP0TCp8zsRVAIyHZz7mpmjIupR&location=' + lat + '%2C' + lng + '&outFormat=json&thumbMaps=false',
   )
     .then((response) => response.json())
     .then((responseJson) => {
@@ -193,49 +210,50 @@ const fetchLocationName =  (position) => {
       console.log(
         'ADDRESS GEOCODE is BACK!! => ' + JSON.stringify(responseJson),
         searchCity = responseJson.results[0].locations[0].adminArea5 + "+" + responseJson.results[0].locations[0].adminArea3 + "+" + responseJson.results[0].locations[0].adminArea1
-        
       );
       searchQuery(searchCity)
     });
 };
-// Runs this function on page load
-// fetchLocationName()
-//DIsplays while api loads data
-const loader = document.querySelector("#loading");
-const loaderText = document.querySelector("#load-text");
-//Display Loading
-function displayLoading() {
-  loader.classList.add("display");
-  loaderText.classList.add("display");
+
+//hides while api loads data
+let loader = document.querySelector("#loading");
+let loaderText = document.querySelector("#load-text");
+
+//hide Loading
+function hideLoading() {
+  loader.classList.add("hide");
+  loaderText.classList.add("hide");
+
   //Stops loader after 5 seconds
   setTimeout(() => {
-      loader.classList.remove("display");
-      loaderText.classList.remove("display");
+    loader.classList.remove("hide");
+    loaderText.classList.remove("hide");
   }, 10000);
 }
-//Hiding Loading 
+
+//Hiding Loading icon on start
 function hideLoading() {
-  loader.classList.remove("display");
-  loaderText.classList.remove("display");
+  loader.classList.remove("hide");
+  loaderText.classList.remove("hide");
 }
+
 // Geolocation denied
-navigator.geolocation.getCurrentPosition(function(position) {
+navigator.geolocation.getCurrentPosition(function (position) {
   console.log("allowed");
   fetchLocationName(position)
 },
-function(error) {
-  if (error.code == error.PERMISSION_DENIED)
-    console.log("denied");
-     //What will be displayed
-     result =`
+  function (error) {
+    if (error.code == error.PERMISSION_DENIED)
+      console.log("denied");
+    result = `
      <h3>For Off The Couch to work, please allow location.</h3>
      `
-     //Appends to #denied in HTML
-     $("#denied").append(result)
-});
+    //Appends to #denied in HTML
+    $("#denied").append(result)
+  });
 
-var searchListSave = [];
-var searchListUrlSave = [];
+let searchListSave = [];
+let searchListUrlSave = [];
 
 function updateSearch(searchList) {  //saves search to localstorage
   searchListSave.unshift(searchList)
@@ -243,7 +261,7 @@ function updateSearch(searchList) {  //saves search to localstorage
   if (searchListSave.length && searchListUrlSave.length > 5) {
     searchListSave.pop(); // removes the first element from an array 
     searchListUrlSave.pop();
-}
+  }
   console.log(searchList)
   console.log(searchListSave)
   console.log(searchListUrlSave)
@@ -253,37 +271,33 @@ function updateSearch(searchList) {  //saves search to localstorage
   return showSearchList(searchList, searchListUrl);
 }
 
-
 function init() {  //function to load the text from memory
   searchListSave = JSON.parse(localStorage.getItem("searchListSave"));
   searchListUrlSave = JSON.parse(localStorage.getItem("searchListUrlSave"));
   console.log(searchListSave)
   console.log(searchListUrlSave)
-  if (!searchListSave || !searchListUrlSave ) {  //check to see if the variable exists
+  if (!searchListSave || !searchListUrlSave) {  //check to see if the letiable exists
     console.log("- No saved information"); //prints error message in console
     searchListSave = [];
     searchListUrlSave = [];
     return searchListSave;
   }
-    return showSearchList();
-    
+  return showSearchList();
+}
+
+let cityListEl = document.getElementById("cityListGroup");
+function showSearchList() {  //hides the list of cities chosen in the past
+  cityListEl.innerHTML = "";
+  for (let i = 0; i < searchListSave.length; i++) {
+
+    let li = document.createElement('a');
+    let linkText = document.createTextNode(searchListSave[i]);
+    li.appendChild(linkText);
+    li.setAttribute("class", "oldCity")
+    li.target = "_blank ";
+    li.href = searchListUrlSave[i];
+    $("#cityListGroup").append(li);
   }
-  let cityListEl = document.getElementById("cityListGroup");
-  function showSearchList() {  //displays the list of cities chosen in the past
-    var varText = "";
-    cityListEl.innerHTML = "";
-    for (var i = 0; i < searchListSave.length; i++) {
-
-      var li = document.createElement('a');
-
-      var linkText = document.createTextNode(searchListSave[i]);
-      li.appendChild(linkText);
-      li.setAttribute("class", "oldCity")
-      li.title = "";
-      li.href = searchListUrlSave[i];
-      $("#cityListGroup").append(li);
-    }
-      
-  }
-
+}
+// Runs this function on page load
 init()
