@@ -47,3 +47,4 @@ An application that can take a variety of user inputs such as location, interest
 ## License
 - [APACHE 2.0 LICENSE](license)
 ---
+
