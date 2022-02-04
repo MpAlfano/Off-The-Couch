@@ -57,8 +57,8 @@ body {
 }
 
 .container .results {
-  background-color: var(--darkfade);
   word-wrap: break-word;
+  background-color: var(--darkfade);
   border-radius: 10px;
   width: 100%;
   max-width: 500px;
