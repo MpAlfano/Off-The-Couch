@@ -15,6 +15,8 @@ An application that can take a variety of user inputs such as location, interest
 - [WIREFRAME.CC](https://wireframe.cc/) 
 - [HOVER.CSS](https://ianlunn.github.io/Hover/) 
 
+## Powerpoint Presentation
+[POWERPOINT PRESENTATION](https://docs.google.com/presentation/d/1bmLWY_ERgOwWdYbaw5DLyFqnMvfGh0wJu0KOiqWQCpw/edit?usp=sharing) 
 ## Sample Website
 [DEMO LINK](https://MpAlfano.github.io/Off-The-Couch/) 
 ## Folder Structure
