@@ -50,7 +50,7 @@ $('#restaurantSearch').on('click', function (e) {
   y = Math.floor(Math.random() * 3)
   console.log(x)
   queryA = foodType[x] + "+" + "retaurant" + "+" + searchCity
-  let url = 'http://api.serpstack.com/search?access_key=' + API_KEY + "&type=web&num=1&google_domain=google.ca" + "&query=" + queryA
+  let url = 'https://cors-anywhere.herokuapp.com/http://api.serpstack.com/search?access_key=' + API_KEY + "&type=web&num=1&google_domain=google.ca" + "&query=" + queryA
   console.log(url);
   hideLoading()
   $.get(url, function (data) {
@@ -84,7 +84,7 @@ function searchQuery(searchCity) {
     let queryA = query + '+' + searchCity; //What were actually searching
     let result = ''
 
-    let url = 'http://api.serpstack.com/search?access_key=' + API_KEY + "&type=web&num=1&google_domain=google.ca" + "&query=" + queryA
+    let url = 'https://cors-anywhere.herokuapp.com/http://api.serpstack.com/search?access_key=' + API_KEY + "&type=web&num=1&google_domain=google.ca" + "&query=" + queryA
     console.log(url);
     hideLoading()
     $.get(url, function (data) {
@@ -151,7 +151,7 @@ $('#randomQ').on('click', function (e) {
 
 //Grabs activity from bored api, grabs location from mapquest api, then searches using serpstack api
 function searchRandom(resultRandom, randomQuery) {
-  let url = 'http://api.serpstack.com/search?access_key=' + API_KEY + "&type=web&num=1&google_domain=google.ca" + "&query=" + randomQuery
+  let url = 'https://cors-anywhere.herokuapp.com/http://api.serpstack.com/search?access_key=' + API_KEY + "&type=web&num=1&google_domain=google.ca" + "&query=" + randomQuery
   console.log(url);
   hideLoading()
 
