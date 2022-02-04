@@ -20,7 +20,7 @@ body {
 }
   
 body {
-  background:url(https://raw.githubusercontent.com/MpAlfano/Off-The-Couch/main/assets/images/desktop_img_compressed.jpg);
+  background:url(./assets/images/desktop_img_compressed.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size:cover;
